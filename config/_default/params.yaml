@@ -1,0 +1,53 @@
+colorScheme: congo
+defaultAppearance: dark
+autoSwitchAppearance: true
+defaultThemeColor: "#FFFFFF"
+enableSearch: true
+enableCodeCopy: false
+enableImageLazyLoading: true
+enableImageWebp: true
+fingerprintAlgorithm: sha256
+header:
+  layout: basic
+  showTitle: true
+footer:
+  showCopyright: true
+  showThemeAttribution: true
+  showAppearanceSwitcher: false
+  showScrollToTop: true
+homepage:
+  layout: profile
+  showRecent: true
+  recentLimit: 5
+article:
+  showDate: true
+  showDateUpdated: true
+  showAuthor: true
+  showBreadcrumbs: true
+  showDraftLabel: true
+  showEdit: false
+  editAppendPath: true
+  showHeadingAnchors: true
+  showPagination: true
+  invertPagination: false
+  showReadingTime: true
+  showTableOfContents: true
+  showTaxonomies: true
+  showWordCount: true
+  showComments: false
+list:
+  showBreadcrumbs: true
+  showSummary: false
+  showTableOfContents: false
+  showTaxonomies: false
+  groupByYear: true
+  paginationWidth: 1
+sitemap:
+  excludedKinds:
+    - taxonomy
+    - term
+taxonomy:
+  showTermCount: true
+fathomAnalytics: {}
+plausibleAnalytics: {}
+verification: {}

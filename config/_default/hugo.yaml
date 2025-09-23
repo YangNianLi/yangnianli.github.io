@@ -1,0 +1,23 @@
+baseURL: https://yang.github.com/
+theme: congo
+languageCode: en
+defaultContentLanguage: en
+enableRobotsTXT: true
+summaryLength: 0
+pagination:
+  pagerSize: 10
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+privacy:
+  vimeo:
+    enableDNT: true
+  x:
+    enableDNT: true
+  youTube:
+    privacyEnhanced: true
+services:
+  x:
+    disableInlineCSS: true

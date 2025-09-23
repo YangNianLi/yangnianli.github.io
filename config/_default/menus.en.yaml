@@ -1,0 +1,25 @@
+main:
+  - name: About
+    pageRef: about
+    weight: 10
+  - name: MySQL
+    pageRef: mysql
+    weight: 20
+  - name: SRE
+    pageRef: sre
+    weight: 30
+  # - name: Categories
+  #   pageRef: categories
+  #   weight: 40
+  - name: Tags
+    pageRef: tags
+    weight: 50
+  - identifier: Search
+    weight: 99
+    params:
+      action: search
+      icon: search
+  - identifier: Appearance
+    weight: 100
+    params:
+      action: appearance
