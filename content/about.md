@@ -1,8 +1,7 @@
 ---
-date: '2025-09-15T15:27:12-08:00'
+date: '2025-09-15'
 draft: false
 description: 'about me'
-# title: 'About Me'
 slug: about
 showAuthor: false
 showDate: false

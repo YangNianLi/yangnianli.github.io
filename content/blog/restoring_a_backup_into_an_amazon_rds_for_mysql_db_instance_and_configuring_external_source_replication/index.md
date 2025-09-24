@@ -1,5 +1,5 @@
 ---
-date: '2025-09-16T09:21:15-08:00'
+date: '2025-09-16'
 draft: false
 title: '[AWS] Restoring a backup into an Amazon RDS for MySQL DB instance and Configuring external source replication'
 description:
@@ -7,6 +7,7 @@ categories:
   - aws
 tags:
   - rds
+  - sre
 ---
 
 ## Introduction

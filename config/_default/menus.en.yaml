@@ -2,15 +2,15 @@ main:
   - name: About
     pageRef: about
     weight: 10
-  - name: MySQL
-    pageRef: mysql
-    weight: 20
-  - name: SRE
-    pageRef: sre
+  # - name: MySQL
+  #   pageRef: mysql
+  #   weight: 20
+  - name: Blog
+    pageRef: blog
     weight: 30
-  # - name: Categories
-  #   pageRef: categories
-  #   weight: 40
+  - name: Categories
+    pageRef: categories
+    weight: 40
   - name: Tags
     pageRef: tags
     weight: 50
