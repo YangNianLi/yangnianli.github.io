@@ -21,3 +21,5 @@ privacy:
 services:
   x:
     disableInlineCSS: true
+  googleAnalytics:
+    id: G-0Q0Y4KPS1M
