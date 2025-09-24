@@ -8,7 +8,7 @@ params:
   description: A blog about newbie DBA
   author:
     name: Yang
-    image: author.jpg
+    image: author.png
     bio: Specialized in MySQL, familiar with databases
     headline: "He lives in Taichung City with his SPOF (wife) and two replicas<br>- v1.0 (boy) and v2.0 (girl), both in primary school."
     links:
