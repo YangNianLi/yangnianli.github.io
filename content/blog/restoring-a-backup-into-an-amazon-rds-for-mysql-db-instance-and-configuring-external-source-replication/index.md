@@ -29,19 +29,19 @@ tags:
 
 ---
 
-p.s.
-除了使用 MySQL Native Replication 以外，<br>
-還有另外一個備案 - [AWS DMS](https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html)<br>
-也可以達到相同的結果，只是同步資料的方式改成使用 DMS 實現
+> p.s.
+> 除了使用 MySQL Native Replication 以外，<br>
+> 還有另外一個備案 - [AWS DMS](https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html)<br>
+> 也可以達到相同的結果，只是同步資料的方式改成使用 DMS 實現
 
 ### Restoring a backup into an Amazon RDS for MySQL DB instance
 
 ![restoring](restoring_a_backup_into_an_amazon_rds_for_mysql_db_instance.png)
 
 #### 建置 GCP 測試機
->
-> 因為測試過程會需要新增 fw 相關設定，故此次測試是使用自己專案自建 VPC，<br>
-> 正式啟用時會使用 XPN 架構，但原理跟步驟是相同的
+
+> 因為測試過程會需要新增 fw 相關設定，故此次測試是使用測試專案自建 VPC，<br>
+> 正式啟用時是使用 [XPN](https://cloud.google.com/vpc/docs/shared-vpc) 架構，但原理跟步驟是相同的
 
 ##### 建置 VPC / Subnets
 
@@ -81,11 +81,11 @@ gcloud compute firewall-rules create ${FW_NAME} \
 
 ##### 建置 MySQL
 
-這邊是使用內部自研的平台建置，就不贅述了
+這邊是使用內部自研的平台建置，就不展開說明了
 
 ##### 建置 External Load Balancer
 
-新增 External Load Balancer 跟 Instance Groups，沒有什麼需要特別留意的
+新增 [External Load Balancer](https://cloud.google.com/load-balancing/docs/passthrough-network-load-balancer) 跟 [Instance Groups](https://cloud.google.com/load-balancing/docs/network/setting-up-network-backend-service)，沒有什麼需要特別留意的
 
 #### 使用 PXB 備份至 AWS S3
 
@@ -98,9 +98,9 @@ sudo ./aws/install
 ```
 
 ##### Configuration AWS CLI
->
+
 > 因為 AWS 測試環境的 Account 是採用 SSO 登入，<br>
-> 之前 Access Key 的方案已經無法使用囉
+> 之前使用過的 Access Key 方案已經無法使用囉
 
 ```bash
 aws configure sso --use-device-code
@@ -119,9 +119,9 @@ aws s3 cp yangtest.xbstream s3://aws_s3_bucket_name
 ```
 
 #### 還原至 AWS RDS
->
-> 目前內部使用的 Terraform RDS Modules 已經有支援 Restore From S3 的相關配置，<br>
-> 請參考 Github
+
+> 公司內部使用的 Terraform RDS Modules 有支援 Restore From S3 的相關配置，<br>
+> 但是公司內部 Modules，無法分享請見諒，有問題可以詢問哦
 
 主要新增
 
@@ -136,8 +136,8 @@ s3_import_ingestion_role = "arn:aws:iam::xxxxxxxxxxxx:role/rds-restore-from-s3-r
 * `s3_import_ingestion_role` : 使用哪個 Role 來執行
 
 ### Configuring external source replication
->
-> [AWS RDS Documentation : Configuring, starting, and stopping binary log ( binlog ) replication # mysql.rds_set_external_master_with_auto_position](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql-stored-proc-replicating.html#mysql_rds_set_external_master_with_auto_position)
+
+> [AWS RDS Documentation : Configuring, starting, and stopping binary log ( binlog ) replication](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql-stored-proc-replicating.html#mysql_rds_set_external_master_with_auto_position)
 
 ```MySQL
 ### 連到 RDS，執行以下 Stored Procedures
@@ -178,8 +178,8 @@ p.s. 如果 PXB 的來源是 Replica 的話，<br>
 
 ### Q : [內部自研平台] 選不到自建的 Subnets
 
-A : 因為設定檔中有參數來決定監控建置機器所需要使用到的 `網路專案`，<br>
-會這樣設計的原因是因為我們網路環境大多是使用 XPN 架構，<br>
+A : 因為設定檔中有參數來決定平台建置機器所需要使用到的 `網路專案`，<br>
+會這樣設計的原因是因為我們網路環境大多是使用 [XPN](https://cloud.google.com/vpc/docs/shared-vpc) 架構，<br>
 所以需要將 `網路專案` 設定為不同的 Project
 
 ### Q : [內部自研平台] 還是選不到呀
@@ -238,7 +238,9 @@ Root Cause 是因為呼叫不到內部的 API，<br>
 
 解決辦法，暫時將 [上述 Cloud NAT 產生的 IP](#q--startup-script-沒有執行) 新增至 API 的 allow_list
 
-p.s. 成功後記得刪除 allow_list
+{{< alert >}}
+成功後記得刪除 allow_list
+{{< /alert >}}
 
 ### Q : [SSO] oauth callback error 127.0.0.1
 
@@ -280,7 +282,7 @@ A : 源自於對 AWS IAM 不熟悉導致，<br>
 
 ![iam_passrole](iam_passrole.png)
 
-~又是一個不知所云的範例，~<br>
+~又是一個我沒慧根的範例，~<br>
 這是要加在 `使用者` 的權限，<br>
 以我們目前 AWS Account 的規劃來說，<br>
 存在一個 Roles，名稱為 `AWSReservedSSO_DatabaseAdministrator_xxxxxx`，<br>
@@ -289,7 +291,8 @@ A : 源自於對 AWS IAM 不熟悉導致，<br>
 
 ---
 
-額外說明一下為什麼 AWS 設計 `iam:PassRole` 的原因，主要是安全上的考量
+額外說明一下為什麼 AWS 會設計 `iam:PassRole` 的原因，<br>
+主要是安全上的考量
 
 ![why_iam_passrole](why_iam_passrole.png)
 
@@ -326,7 +329,7 @@ Bad User 便不能賦予 `AdministratorAccess` Role 的權限給 EC2 Service，<
 
 基本上這個任務想像起來沒有什麼太大的困難，<br>
 實際按照官方 Documentation 操作也只有少少的 1-2 頁，<br>
-但就如同本篇文章的現實爆擊，<br>
+但就如同本篇文章的現實衝擊，<br>
 Troubleshooting 的篇幅大概比實際操作多了一倍以上，<br>
 關關難過，但就關關過吧
 

@@ -7,7 +7,9 @@ categories:
 tags:
 ---
 
-> hello
+{{< lead >}}
+hello
+{{< /lead >}}
 
 ## Introduction
 
