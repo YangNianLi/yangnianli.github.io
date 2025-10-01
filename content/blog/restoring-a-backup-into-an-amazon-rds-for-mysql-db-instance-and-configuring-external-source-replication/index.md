@@ -2,7 +2,7 @@
 date: '2025-09-16'
 draft: false
 title: '[AWS] Restoring a backup into an Amazon RDS for MySQL DB instance and Configuring external source replication'
-description:
+description: Restoring a backup into an Amazon RDS for MySQL DB instance and Configuring external source replication
 categories:
   - aws
 tags:
