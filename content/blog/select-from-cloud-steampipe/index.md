@@ -17,7 +17,7 @@ tags:
 ## Introduction
 
 因應工作需求，使用到 GCP 以及 AWS 服務，<br>
-又因為 DR 的關係，GCP 跟 AWS 之間要建置 [Site-to-Site VPN](https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html)。<br>
+又因為 DR 的關係，GCP 跟 AWS 之間有建置 [Site-to-Site VPN](https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html)。<br>
 GCP 的網路環境是使用 [Shared VPC ( XPN )](https://docs.cloud.google.com/vpc/docs/shared-vpc)，然後在 2 個不同的 Project；<br>
 AWS 的網路環境是使用 [Resource Access Manager ( RAM )](https://aws.amazon.com/tw/ram/) 分享，獨立在 1 個 Account<br>
 
@@ -55,7 +55,7 @@ VPN 是 HA VPN，所以再 * 2<br>
 
 ![steampipe-website](steampipe-website.png)
 
-[Steampipe](https://steampipe.io) 是一個主打 zero-ETL 的工具，<br>
+[Steampipe](https://steampipe.io) 是一個主打 Zero-ETL 的工具，<br>
 會協助我們直接通過 API 或服務來取得資料，<br>
 讓我們使用 PostgreSQL 介面查詢資料
 
@@ -85,7 +85,7 @@ Steampipe v2.1.0
 
 ## Install the plugin
 
-Steampipe 需要額外安裝不同 plugin 來支援各種 vendor，<br>
+Steampipe 需要額外安裝不同 plugin 來支援各種 vender，<br>
 這邊以 AWS 跟 GCP 為例
 
 * 安裝 AWS plugin
@@ -100,7 +100,7 @@ steampipe plugin install aws
 steampipe plugin install gcp
 ```
 
-Steampipe 預設會使用 default 的 AWS credentials 跟 GCP 的 Application Default Credentials，<br>
+Steampipe 預設會使用 Default 的 AWS Credentials 跟 GCP 的 Application Default Credentials，<br>
 但就如同上述提過的，我們 GCP 的網路環境使用了 2 個不同 Project 的 XPN，<br>
 所以我有新增額外的連線來讓我方便一次撈取不同 Project 的資訊<br>
 
@@ -222,7 +222,7 @@ WHERE
 不過 [Steampipe](https://steampipe.io) 對於 SRE 來說，<br>
 真的帶來許多的便利性，<br>
 畢竟 SQL 可以說是世界共通的語言之一，<br>
-你可以不懂不同 Vendor 的 API，<br>
+你可以不懂不同 Vender 的 API，<br>
 但你一定懂 SQL<br>
 
 就如同 [Steampipe](https://steampipe.io) 提到的，<br>
