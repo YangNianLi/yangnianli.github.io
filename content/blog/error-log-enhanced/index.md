@@ -10,7 +10,7 @@ tags:
 ---
 
 {{< lead >}}
-這是 [What Is New in MySQL 8.4 since MySQL 8.0](https://dev.mysql.com/doc/refman/8.4/en/mysql-nutshell.html) 的系列文，<br>
+這是 [What Is New in MySQL 8.4 since MySQL 8.0](https://dev.mysql.com/doc/refman/8.4/en/mysql-nutshell.html) 的[系列文](tags/mysql8.4/)，<br>
 會針對部分我覺得跟日常維運有關的更動特別研究，<br>
 其餘的就當故事書，看過知道即可
 {{< /lead >}}
@@ -694,10 +694,7 @@ SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Urgent ERROR';
 
 ---
 
-## Reference
-
-* [MySQL Documentation : 7.4.2 The Error Log](https://dev.mysql.com/doc/refman/8.4/en/error-log.html)
-* 後來 MySQL 8.4 內部設定檔公版修改為
+後來 MySQL 8.4 內部設定檔公版修改為
 
 ```
 log_error_services                = 'log_sink_internal; log_filter_dragnet; log_sink_json;'
@@ -723,3 +720,9 @@ dragnet.log_error_filter_rules    = 'IF err_code == ER_ABORTING_USER_CONNECTION 
 `'IF err_code == ER_ABORTING_USER_CONNECTION THEN drop.'`<br>
 既可以保留原始的 Error Log (`log_sink_internal`)，<br>
 又可以減少雜訊後再存入 JSON Format 的 Error Log (`log_sink_json`)<br>
+
+---
+
+## Reference
+
+* [MySQL Documentation : 7.4.2 The Error Log](https://dev.mysql.com/doc/refman/8.4/en/error-log.html)

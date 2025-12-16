@@ -8,6 +8,10 @@ tags:
   - aurora
 ---
 
+{{< badge >}}
+2025-12-14 updates ! 新增 AWS TAM 回覆
+{{< /badge >}}
+
 {{< lead >}}
 這跟之前撰寫過的這篇類似<br>
 [[AWS] Restoring a backup into an Amazon RDS for MySQL DB instance and Configuring external source replication](/blog/restoring-a-backup-into-an-amazon-rds-for-mysql-db-instance-and-configuring-external-source-replication/
@@ -201,6 +205,13 @@ Source_SSL_Verify_Server_Cert: No
 > * You can only pull binary logs from the Writer Instance.<br>
 > [Can we configure separate binary logging (binlog) on Aurora MySQL's Read REplica instance?](https://repost.aws/questions/QUQuQ2eje6TnatP_lAtdydhg/can-we-configure-separate-binary-logging-binlog-on-aurora-mysql-s-read-replica-instance)
 
+{{< alert "amazon" >}}
+2025-12-14 AWS TAM : <br>
+因為 RDS 或 Aurora 的 Binary logs 只存在 Writer 上，<br>
+所以 Reader 無法產生 Binary logs，<br>
+之前回覆有誤，只有自建的 MySQL Cluster 才能使用 Slave AS a Binlog Source
+{{< /alert >}}
+
 ### POC3 - 建置 MySQL -> Aurora Writer ( GCP -> AWS )
 
 ![gcp2aurora-writer](gcp2aurora-writer.png)
@@ -289,6 +300,32 @@ MySQL > SHOW CREATE PROCEDURE mysql.rds_set_external_source_with_auto_position \
 
 目前 workaround 是把 Source 的 `collation_server` 設定移除，<br>
 維持預設的 `utf8mb4_0900_ai_ci`
+
+{{< alert "amazon" >}}
+2025-12-14 AWS TAM : <br>
+提供三種解法<br>
+a) 如果可以修改 MySQL 的 Collation，這是最直接的解法<br>
+
+p.s. 不過後續我自行測試以及跟 Percona 原廠討論後，<br>
+mysql 是 system 專用的 schema，<br>
+是沒有辦法修改 Collation 的，<br>
+只能初始化 Instance 後，再把資料匯入<br>
+
+b) 如果影響很大，使用 Logical Backup 匯出，<br>
+再使用 sed 的方式修改匯出檔案後再匯入<br>
+
+Example : <br>
+$ sed -i 's/utf8mb4_general_ci/utf8mb4_0900_ai_ci/g' dump.sql<br>
+$ sed -i 's/COLLATE=utf8mb4_general_ci/COLLATE=utf8mb4_0900_ai_ci/g' dump.sql<br>
+
+c) AWS TAM 其實最推薦使用 AWS DMS <br>
+Example : <br>
+$ aws dms create-replication-instance \ <br>
+-replication-instance-identifier gcp-to-aurora \ <br>
+-replication-instance-class dms.t3.medium \ <br>
+-allocated-storage 50
+
+{{< /alert >}}
 
 ---
 

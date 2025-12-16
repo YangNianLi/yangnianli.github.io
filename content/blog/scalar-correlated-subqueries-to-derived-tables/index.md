@@ -10,7 +10,7 @@ tags:
 ---
 
 {{< lead >}}
-這是 [What Is New in MySQL 8.4 since MySQL 8.0](https://dev.mysql.com/doc/refman/8.4/en/mysql-nutshell.html) 的系列文，<br>
+這是 [What Is New in MySQL 8.4 since MySQL 8.0](https://dev.mysql.com/doc/refman/8.4/en/mysql-nutshell.html) 的[系列文](tags/mysql8.4/)，<br>
 會針對部分我覺得跟日常維運有關的更動特別研究，<br>
 其餘的就當故事書，看過知道即可
 {{< /lead >}}
@@ -195,7 +195,7 @@ EXPLAIN SELECT * FROM t1 WHERE ( SELECT COUNT(t2.a) FROM t2 WHERE CAST(t2.a AS B
 
 ## Afterword
 
-這篇再研究後就默默地把它移除 :star: 的標記了 :joy:<br>
+這篇在研究後就默默地把它移除 :star: 的標記了 :joy:<br>
 一開始是因為看到這跟 [optimizer_switch][optimizer_switch_link] 有關，<br>
 所以才將其標記為 :star:，<br>
 深入研究後發現這異動似乎沒什麼太大的影響，<br>
