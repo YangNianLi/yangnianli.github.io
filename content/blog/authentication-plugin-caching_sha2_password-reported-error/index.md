@@ -1,7 +1,7 @@
 ---
 date: '2025-12-16'
 draft: false
-title: 'Authentication plugin `caching_sha2_password` reported error'
+title: '[MySQL] Authentication plugin `caching_sha2_password` reported error'
 description:
 categories: databases
 tags:
